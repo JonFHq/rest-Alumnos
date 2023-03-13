@@ -26,6 +26,9 @@ public class ExamenPostmanController {
 
     @PostMapping(path = "/ALUMNOS/LIST", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Alumnos>> listAlumnos() {
+        listAlumnos.add(new Alumnos(1, "Juan", "no"));
+        listAlumnos.add(new Alumnos(1, "Maria", "no"));
+        listAlumnos.add(new Alumnos(2, "Pedro", "no"));
         return new ResponseEntity<>(listAlumnos, HttpStatus.OK);
     }
 
