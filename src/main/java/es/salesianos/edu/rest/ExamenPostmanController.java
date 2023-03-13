@@ -60,4 +60,10 @@ public class ExamenPostmanController {
         alumnoResult.setFct(fct);
         return new ResponseEntity<>(alumnoResult, HttpStatus.ACCEPTED);
     }
+
+    @GetMapping(path = "/ALUMNOS/DELETEALL", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Alumnos>> deleteAllAlumnos() {
+        listAlumnos.clear();
+        return new ResponseEntity<>(listAlumnos, HttpStatus.OK);
+    }
 }
