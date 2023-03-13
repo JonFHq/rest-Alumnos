@@ -31,20 +31,33 @@ public class ExamenPostmanController {
 
     @PostMapping(path = "/ALUMNOS/INSERT", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Alumnos> insertAlumnos(@RequestBody Alumnos alumno) {
-        
+
         if (alumno.getId() == 0) {
-            alumno.setId(listAlumnos.size());
+            alumno.setId(listAlumnos.size() + 1);
         }
 
         listAlumnos.add(alumno);
         return new ResponseEntity<>(alumno, HttpStatus.CREATED);
+
     }
 
-    @GetMapping(path = "/ALUMNOS/DELETE/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Alumnos> deleteAlumnos(@PathVariable int id) {
+    @GetMapping(path = "/ALUMNOS/DELETE/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Alumnos> deleteAlumnos(@RequestParam("id") int id) {
         Alumnos alumnoResult = listAlumnos.stream().filter(alumno -> alumno.getId() == id).findFirst().orElse(null);
         listAlumnos.removeIf(alumno -> alumno.getId() == id);
+        if (alumnoResult == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(alumnoResult, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/ALUMNOS/UPDATE/{id}/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Alumnos> updateAlumnosFct(@PathVariable("id") int id, @RequestParam("fct") String fct) {
+        Alumnos alumnoResult = listAlumnos.stream().filter(alumno -> alumno.getId() == id).findFirst().orElse(null);
+        if (alumnoResult == null) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+        alumnoResult.setFct(fct);
+        return new ResponseEntity<>(alumnoResult, HttpStatus.ACCEPTED);
+    }
 }
