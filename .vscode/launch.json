@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ExamenApplication<ExamenPostman>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "es.salesianos.edu.ExamenApplication",
+            "projectName": "ExamenPostman",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
